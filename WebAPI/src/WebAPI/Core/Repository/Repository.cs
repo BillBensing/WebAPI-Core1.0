@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -35,7 +34,6 @@ namespace WebAPI.Core.Repository
         public virtual T Add(T entity)
         {
             return _dbset.Add(entity) as T;
- 
         }
 
         public virtual T Delete(T entity)

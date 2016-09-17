@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebAPI.Core.Entity;
@@ -9,7 +8,7 @@ namespace WebAPI.Core.Service
 {
     public abstract class Service<T> : IService<T> where T : BaseEntity
     {
-       private readonly IRepository<T> _repository;
+       protected readonly IRepository<T> _repository;
 
        public Service(IRepository<T> repository)
         {
@@ -37,7 +36,7 @@ namespace WebAPI.Core.Service
             await _repository.Save();
         }
 
-        public virtual async Task<IEnumerable<T>> GetAll()
+        public virtual async Task<IQueryable<T>> GetAll()
         {
             throw new NotImplementedException();
         }

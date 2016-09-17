@@ -9,7 +9,7 @@ namespace WebAPI.Core.Service
     {
         Task Create(T entity);
         Task Delete(T entity);
-        Task<IEnumerable<T>> GetAll();
+        Task<IQueryable<T>> GetAll();
         Task Update(T entity);
     }
 }
