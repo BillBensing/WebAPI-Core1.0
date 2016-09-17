@@ -11,7 +11,7 @@ namespace WebAPI.Core.Repository
     /// <typeparam name="T">Type of entity</typeparam>
     public interface IRepository<T>
     {
-        IQueryable<T> GetAll();
+        Task<T> Find(int id);
         IQueryable<T> FindBy(Expression<Func<T, bool>> predicate);
         T Add(T entity);
         T Delete(T entity);

@@ -10,7 +10,7 @@ namespace WebAPI.Core.Repository
     /// Generic repository base class
     /// </summary>
     /// <typeparam name="T">Type of entity</typeparam>
-    public class Repository<T> : IRepository<T> where T : BaseEntity
+    public class Repository<T> : IRepository<T> where T : Entity<int>
     {
         protected DbContext _entities;
         protected readonly DbSet<T> _dbset;
@@ -21,14 +21,14 @@ namespace WebAPI.Core.Repository
             _dbset = context.Set<T>();
         }
 
-        public virtual IQueryable<T> GetAll()
+        public virtual async Task<T> Find(int id)
         {
-            return  _dbset.AsQueryable<T>();
+            return await _dbset.FirstOrDefaultAsync(r => r.Id == id);
         }
 
         public virtual IQueryable<T> FindBy(System.Linq.Expressions.Expression<Func<T, bool>> predicate)
         {
-            return _dbset.Where(predicate).AsQueryable();
+                return _dbset.Where(predicate).AsQueryable();
         }
 
         public virtual T Add(T entity)

@@ -42,7 +42,7 @@ namespace WebAPI
                     });
 
             /** Register Services, Repositories & DbContexts **/
-            services.AddScoped<DefaultDbContext, DefaultDbContext>();           
+            services.AddScoped<DbContext, DefaultDbContext>();           
             Core.Config.ServicesRegistration.RegisterServices(services);  // Manages regsitration of all component services
 
         }

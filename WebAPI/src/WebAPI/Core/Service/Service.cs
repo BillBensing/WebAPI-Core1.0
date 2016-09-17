@@ -15,11 +15,19 @@ namespace WebAPI.Core.Service
             _repository = repository;
         }
 
-        public virtual async Task Create(T entity)
+        public virtual async Task<T> Create(T entity)
         {
             if (entity == null) throw new ArgumentNullException();
-            _repository.Add(entity);
+            var result = _repository.Add(entity);
             await _repository.Save();
+            return result;
+        }
+
+        public virtual async Task<T> Read(int id)
+        {
+            if (id == 0) throw new ArgumentException();
+            var result = await _repository.Find(id);
+            return result;     
         }
 
         public virtual async Task Update(T entity)
@@ -29,9 +37,10 @@ namespace WebAPI.Core.Service
            await  _repository.Save();
         }
 
-        public virtual async Task Delete(T entity)
+        public virtual async Task Delete(int id)
         {
-            if (entity == null) throw new ArgumentNullException();
+            if (id == null) throw new ArgumentNullException();
+            var entity = _repository.Find(id) as T;
             _repository.Delete(entity);
             await _repository.Save();
         }
