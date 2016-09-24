@@ -27,7 +27,7 @@ namespace WebAPI.Component.Blog.Controller
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update([FromBody]Blog blog) {
+        public async Task<IActionResult> Update([FromBody] Blog blog) {
             await _blogSvc.Update(blog);
             return NoContent();
         }
