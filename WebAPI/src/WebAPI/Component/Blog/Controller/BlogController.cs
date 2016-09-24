@@ -6,6 +6,7 @@ using WebAPI.Component.Blog.Controller.View;
 using System;
 using WebAPI.Component.Blog.Controller.Decorator;
 using Microsoft.Extensions.Logging;
+using System.Linq;
 
 namespace WebAPI.Component.Blog.Controller
 {
@@ -16,7 +17,7 @@ namespace WebAPI.Component.Blog.Controller
         public BlogController(IBlogService blogService, IBlogViewBuilder viewBuilder, ILogger<BlogController> logger) : base(blogService, viewBuilder, logger) { }
 
         [HttpPost]
-        public async new Task<IActionResult> Create(View.Blog blog)
+        public async new Task<IActionResult> Create([FromBody] View.Blog blog)
         {
             try
             {
@@ -59,7 +60,7 @@ namespace WebAPI.Component.Blog.Controller
         }
 
         [HttpPut("{id}")]
-        public async new Task<IActionResult> Update(int id, View.Blog blog)
+        public async new Task<IActionResult> Update(int id, [FromBody] View.Blog blog)
         {
             try
             {

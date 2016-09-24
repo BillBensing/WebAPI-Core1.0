@@ -12,7 +12,7 @@ namespace WebAPI.Component.Blog.Controller.View
     /// </summary>
     public class Blog : AbstractView
     {
-        [Required, StringLength(100)]
+        [Required]
         public string Url { get; set; }
 
         [Required]

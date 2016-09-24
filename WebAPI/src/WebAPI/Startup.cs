@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using WebAPI.Core.Repository.Context;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using WebAPI.Core.Filters;
 
 namespace WebAPI
 {
@@ -35,13 +36,16 @@ namespace WebAPI
                 .AddDefaultTokenProviders();
 
             /** Register WebAPI MVC Framework **/
-            services.AddMvc()
-                    .AddJsonOptions(options =>
+            services.AddMvc(o =>
+            {
+                o.Filters.Add(typeof(ViewModelStateFilter));
+            })
+                .AddJsonOptions(options =>
                     {
                         options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver();  // Serializes all return objects as JSON by default
                     });
 
-            /** Register Services, Repositories & DbContexts **/            
+            /** Register Services, Repositories & DbContexts **/
             Core.Config.ServicesRegistration.RegisterServices(services);  // Manages regsitration of all component services
 
         }
