@@ -10,7 +10,6 @@ namespace WebAPI.Component.Blog.Config
     {
         public static void RegisterServices(IServiceCollection services)
         {
-            services.AddSingleton<IRepository<Entity.BlogPost>, Repository<Entity.BlogPost>>();
             services.AddSingleton<IBlogPostRepository, BlogPostRepository>();
             services.AddSingleton<IBlogPostService, BlogPostService>();
         }

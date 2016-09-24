@@ -12,8 +12,8 @@ namespace WebAPI.Component.Blog.Config
     {
         public static void RegisterServices(IServiceCollection services)
         {
-            services.AddSingleton<IRepository<Blog>, Repository<Blog>>();
             services.AddSingleton<IBlogRepository, BlogRepository>();
+
             services.AddSingleton<IFactory<View.Blog>, Factory<View.Blog>>();
             services.AddSingleton<IBlogViewBuilder, BlogViewBuilder>();
             services.AddSingleton<IBlogService, BlogService>();
