@@ -13,7 +13,7 @@ namespace WebAPI.Component.Blog.Controller
     public class BlogController : BlogControllerLoggingDecorator, IBlogController
     {
 
-        public BlogController(IBlogService blogService, IBlogViewBuilder viewBuilder, ILogger logger) : base(blogService, viewBuilder, logger) { }
+        public BlogController(IBlogService blogService, IBlogViewBuilder viewBuilder, ILogger<BlogController> logger) : base(blogService, viewBuilder, logger) { }
 
         [HttpPost]
         public async new Task<IActionResult> Create(View.Blog blog)

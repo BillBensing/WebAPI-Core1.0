@@ -1,27 +1,39 @@
-﻿using System;
+﻿using WebAPI.Component.Blog.Controller.View.Factory;
+using WebAPI.Core.Factory;
 using Model = WebAPI.Component.Blog;
 
 namespace WebAPI.Component.Blog.Controller.View.Builder
 {
     public class BlogViewBuilder : IBlogViewBuilder
     {
+        protected IBlogViewFactory _viewFactory;
+
+        public BlogViewBuilder(IBlogViewFactory viewFactory)
+        {
+            _viewFactory = viewFactory;
+        }
+
         public Blog Blog(Model.Blog model)
         {
-            return new View.Blog
-            {
-                Url = model.Url,
-                Description = model.Description
-            };
+            if (model == null) return null;
+
+            var result = _viewFactory.Create(BlogViewEnumerator.Blog) as Blog;
+            result.Url = model.Url;
+            result.Description = model.Description;
+
+            return result;
         }
 
         public BlogSummary BlogSummary(Model.Blog model)
         {
-            return new View.BlogSummary
-            {
-                Id = model.Id,
-                Url = model.Url,
-                Description = model.Description
-            };
+            if (model == null) return null;
+
+            var result = _viewFactory.Create(BlogViewEnumerator.BlogSummary) as BlogSummary;
+            result.Id = model.Id;
+            result.Url = model.Url;
+            result.Description = model.Description;
+
+            return result;
         }
 
         public Model.Blog NewBlog(Blog view)

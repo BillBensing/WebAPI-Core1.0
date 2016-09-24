@@ -8,7 +8,7 @@ using WebAPI.Core.Repository;
 
 namespace WebAPI.Core.Service.Decorator
 {
-    public class ServiceValidationDecorator<T> : AbstractService<T> where T : BaseEntity
+    public class ServiceValidationDecorator<T> : AbstractService<T> where T : AbstractEntity
     {
         /// <summary>
         /// Argument validation decorator for base service implementation

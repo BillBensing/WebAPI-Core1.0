@@ -8,9 +8,9 @@ using WebAPI.Core.Controller.View;
 namespace WebAPI.Component.Blog.Controller.View
 {
     /// <summary>
-    /// Object for creating a new blog.
+    /// Basic Blog object
     /// </summary>
-    public class Blog
+    public class Blog : AbstractView
     {
         [Required, StringLength(100)]
         public string Url { get; set; }

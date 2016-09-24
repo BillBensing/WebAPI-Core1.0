@@ -41,8 +41,7 @@ namespace WebAPI
                         options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver();  // Serializes all return objects as JSON by default
                     });
 
-            /** Register Services, Repositories & DbContexts **/
-            services.AddScoped<DbContext, DefaultDbContext>();           
+            /** Register Services, Repositories & DbContexts **/            
             Core.Config.ServicesRegistration.RegisterServices(services);  // Manages regsitration of all component services
 
         }

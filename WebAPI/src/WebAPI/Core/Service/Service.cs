@@ -4,7 +4,7 @@ using WebAPI.Core.Service.Decorator;
 
 namespace WebAPI.Core.Service
 {
-    public class Service<T> : ServiceValidationDecorator<T> where T : BaseEntity
+    public class Service<T> : ServiceValidationDecorator<T> where T : AbstractEntity
     {
         /// <summary>
         /// Implementation of all base Service Logic

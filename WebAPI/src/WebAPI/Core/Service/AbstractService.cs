@@ -6,7 +6,7 @@ using WebAPI.Core.Repository;
 
 namespace WebAPI.Core.Service
 {
-    public abstract class AbstractService<T> : IService<T> where T : BaseEntity
+    public abstract class AbstractService<T> : IService<T> where T : AbstractEntity
     {
        protected readonly IRepository<T> _repository;
 

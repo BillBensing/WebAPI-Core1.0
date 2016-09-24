@@ -7,7 +7,7 @@ using WebAPI.Core.Controller;
 namespace WebAPI.Component.Blog.Controller
 {
     
-    public abstract class BlogControllerBase : AbstractController
+    public class BlogControllerBase : AbstractController
     {
         protected readonly IBlogService _blogSvc;
         protected readonly IBlogViewBuilder _viewBldr;

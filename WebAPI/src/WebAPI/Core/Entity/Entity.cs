@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace WebAPI.Core.Entity
 {
-    public abstract class Entity<T> : BaseEntity, IEntity<T>
+    public abstract class Entity<T> : AbstractEntity, IEntity<T>
     {
         public virtual T Id { get; set; }
     }

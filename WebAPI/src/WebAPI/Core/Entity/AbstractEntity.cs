@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace WebAPI.Core.Entity
 {
-    public abstract class BaseEntity
+    public abstract class AbstractEntity
     {
 
     }
