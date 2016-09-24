@@ -10,7 +10,11 @@ namespace WebAPI.Core.Service
     {
        protected readonly IRepository<T> _repository;
 
-       public AbstractService(IRepository<T> repository)
+        /// <summary>
+        /// Base logic for all Service inheritance
+        /// </summary>
+        /// <param name="repository">Generic Repository for an Entity</param>     
+        public AbstractService(IRepository<T> repository)
         {
             _repository = repository;
         }
@@ -41,9 +45,5 @@ namespace WebAPI.Core.Service
             await _repository.Save();
         }
 
-        public virtual async Task<IQueryable<T>> GetAll()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

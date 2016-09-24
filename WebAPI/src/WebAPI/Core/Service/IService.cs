@@ -11,6 +11,5 @@ namespace WebAPI.Core.Service
         Task<T> Read(int id);
         Task Update(T entity);
         Task Delete(int id);
-        Task<IQueryable<T>> GetAll();
     }
 }
