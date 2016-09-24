@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using WebAPI.Component.Blog.Controller.View;
 
 namespace WebAPI.Component.Blog.Controller
 {
