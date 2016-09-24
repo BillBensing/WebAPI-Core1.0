@@ -1,12 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using WebAPI.Component.Blog.Controller.View.Builder;
 using WebAPI.Component.Blog.Service;
 using WebAPI.Core.Controller;
 
 namespace WebAPI.Component.Blog.Controller
-{
-    
+{   
     public class BlogControllerBase : AbstractController
     {
         protected readonly IBlogService _blogSvc;

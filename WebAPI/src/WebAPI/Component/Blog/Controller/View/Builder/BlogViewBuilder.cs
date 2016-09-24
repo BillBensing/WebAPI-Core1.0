@@ -1,14 +1,16 @@
-﻿using WebAPI.Component.Blog.Controller.View.Factory;
-using WebAPI.Core.Factory;
+﻿using WebAPI.Core.Factory;
 using Model = WebAPI.Component.Blog;
 
 namespace WebAPI.Component.Blog.Controller.View.Builder
 {
+    /// <summary>
+    /// Builder for Blog Compoent views.  Allows you to view, or models, for the controller.
+    /// </summary>
     public class BlogViewBuilder : IBlogViewBuilder
     {
-        protected IBlogViewFactory _viewFactory;
+        protected readonly IFactory<Blog> _viewFactory;
 
-        public BlogViewBuilder(IBlogViewFactory viewFactory)
+        public BlogViewBuilder(IFactory<Blog> viewFactory)
         {
             _viewFactory = viewFactory;
         }
@@ -38,6 +40,8 @@ namespace WebAPI.Component.Blog.Controller.View.Builder
 
         public Model.Blog NewBlog(Blog view)
         {
+            if (view == null) return null;
+
             return new Model.Blog
             {
                 Id = 0,
@@ -48,6 +52,8 @@ namespace WebAPI.Component.Blog.Controller.View.Builder
 
         public Model.Blog UdpateBlog(int id, Blog view)
         {
+            if (view == null) return null;
+
             return new Model.Blog
             {
                 Id = id,

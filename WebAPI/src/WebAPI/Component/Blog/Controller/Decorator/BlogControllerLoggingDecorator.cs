@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.Filters;
 using WebAPI.Component.Blog.Controller.View;
 using WebAPI.Component.Blog.Controller.View.Builder;
 using WebAPI.Component.Blog.Service;
@@ -12,7 +9,7 @@ namespace WebAPI.Component.Blog.Controller.Decorator
 {
     public class BlogControllerLoggingDecorator : BlogControllerBase
     {
-        protected ILogger _logger;
+        protected readonly ILogger _logger;
 
         public BlogControllerLoggingDecorator(IBlogService blogService, IBlogViewBuilder viewBuilder, ILogger logger) : base(blogService, viewBuilder)
         {
@@ -69,5 +66,6 @@ namespace WebAPI.Component.Blog.Controller.Decorator
                 throw;
             }
         }
+
     }
 }

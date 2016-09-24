@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace WebAPI.Core.Factory
 {
-    public abstract class AbstractFactory<T> : IFactory<T>
+    public class Factory<T> : IFactory<T>
     {
         public virtual T Create(Enum selection)
         {
