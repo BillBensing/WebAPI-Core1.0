@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using WebAPI.Core.Entity;
-using WebAPI.Core.Errors;
+using WebAPI.Core.Exception;
 using WebAPI.Core.Repository;
 
 namespace WebAPI.Core.Service.Decorator
