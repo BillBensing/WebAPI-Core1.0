@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Linq.Dynamic.Core;
 
 namespace WebAPI.Core.Extension
 {
@@ -7,27 +8,20 @@ namespace WebAPI.Core.Extension
     {
         public static IQueryable<T> ApplySort<T>(this IQueryable<T> source, string sort)
         {
-            if (source == null)
-            {
-                throw new ArgumentNullException(nameof(source));
-            }
+            if (source == null) throw new ArgumentNullException(nameof(source));
 
-            if (sort == null)
-            {
-                return source;
-            }
+            if (sort == null) return source;
 
             // split the sort string
             var lstSort = sort.Split(',');
 
             // run through the sorting options and create a sort expression string from them
-
             var completeSortExpression = "";
+
             foreach (var sortOption in lstSort)
             {
                 // if the sort option starts with "-", we order
                 // descending, otherwise ascending
-
                 if (sortOption.StartsWith("-"))
                 {
                     completeSortExpression = completeSortExpression + sortOption.Remove(0, 1) + " descending,";
@@ -36,7 +30,6 @@ namespace WebAPI.Core.Extension
                 {
                     completeSortExpression = completeSortExpression + sortOption + ",";
                 }
-
             }
 
             if (!string.IsNullOrWhiteSpace(completeSortExpression))

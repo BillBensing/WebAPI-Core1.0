@@ -1,9 +1,5 @@
 {
   "dependencies": {
-    "Microsoft.NETCore.App": {
-      "version": "1.0.0",
-      "type": "platform"
-    },
     "Microsoft.AspNetCore.Mvc": "1.0.0",
     "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0",
     "Microsoft.AspNetCore.Server.Kestrel": "1.0.0",
@@ -22,7 +18,10 @@
       "type": "build",
       "version": "1.0.0-preview2-final"
     },
-    "Microsoft.AspNetCore.Mvc.Formatters.Json": "1.0.0"
+    "Microsoft.AspNetCore.Mvc.Formatters.Json": "1.0.0",
+    "Swashbuckle.SwaggerGen": "6.0.0-beta902",
+    "Swashbuckle.SwaggerUi": "6.0.0-beta902",
+    "System.Linq.Dynamic.Core": "1.0.5.4"
   },
 
   "tools": {
@@ -37,9 +36,22 @@
   },
 
   "frameworks": {
+    "net451": {
+      "dependencies": {
+        "System.Linq.Dynamic": "1.0.6"
+      }
+    },
     "netcoreapp1.0": {
+      "dependencies": {
+        "Microsoft.NETCore.App": {
+          "type": "platform",
+          "version": "1.0.0"
+        }
+      },
       "imports": [
         "dotnet5.6",
+        "dnxcore50",
+        "netstandard1.6",
         "portable-net45+win8"
       ]
     }
@@ -47,7 +59,9 @@
 
   "buildOptions": {
     "emitEntryPoint": true,
-    "preserveCompilationContext": true
+    "preserveCompilationContext": true,
+    "xmlDoc": true,
+    "nowarn": [ "1591", "1570" ]
   },
 
   "runtimeOptions": {
