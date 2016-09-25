@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 namespace WebAPI.Component.Blog.Controller
 {
     [Route("api/blog")]
-    public class BlogController : BlogControllerLoggingDecorator, IBlogController
+    public class BlogController : BlogControllerLogging, IBlogController
     {
 
         public BlogController(IBlogService blogService, IBlogViewBuilder viewBuilder, ILogger<BlogController> logger) 
@@ -18,59 +18,65 @@ namespace WebAPI.Component.Blog.Controller
         [HttpPost]
         public async new Task<IActionResult> Create([FromBody] View.Blog blog)
         {
+            IActionResult result;
             try
             {
-                var result = await base.Create(blog);
-                return Ok(result);
+                var newBlog = await base.Create(blog);
+                result = Ok(newBlog);
             }
             catch (Exception)
             {
-                return StatusCode(500);
+                result = StatusCode(500);
             }
+            return result;
         }
 
         [HttpGet("{id}")]
         public async new Task<IActionResult> Read(int id)
         {
+            IActionResult result;
             try
             {
                 var blog = await base.Read(id);
-                var result = (blog != null) ? Ok(blog) : NotFound() as IActionResult;
-                return result;
+                result = (blog != null) ? Ok(blog) : NotFound() as IActionResult;
             }
             catch (Exception)
             {
-                return StatusCode(500);
+                result = StatusCode(500);
             }
+            return result;
         }
 
         [HttpDelete("{id}")]
         public async new Task<IActionResult> Delete(int id)
         {
+            IActionResult result;
             try
             {
                 await base.Delete(id);
-                return NoContent();
+                result = NoContent();
             }
             catch (Exception)
             {
-                return StatusCode(500);
+                result = StatusCode(500);
             }
+            return result;
         }
 
         [HttpPut("{id}")]
         public async new Task<IActionResult> Update(int id, [FromBody] View.Blog blog)
         {
+            IActionResult result;
             try
             {
                 await base.Update(id, blog);
-                return NoContent();
+                result = NoContent();
             }
             catch (Exception)
             {
-
-                throw;
+                result = StatusCode(500);
             }
+            return result;
         }
     }
 }

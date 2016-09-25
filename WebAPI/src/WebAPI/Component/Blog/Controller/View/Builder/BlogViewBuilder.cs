@@ -1,4 +1,5 @@
-﻿using WebAPI.Core.Factory;
+﻿using System;
+using WebAPI.Core.Factory;
 using Model = WebAPI.Component.Blog;
 
 namespace WebAPI.Component.Blog.Controller.View.Builder
@@ -15,7 +16,7 @@ namespace WebAPI.Component.Blog.Controller.View.Builder
             _viewFactory = viewFactory;
         }
 
-        public Blog Blog(Model.Blog model)
+        public Blog ToBlogView(Model.Blog model)
         {
             if (model == null) return null;
 
@@ -26,7 +27,7 @@ namespace WebAPI.Component.Blog.Controller.View.Builder
             return result;
         }
 
-        public BlogSummary BlogSummary(Model.Blog model)
+        public BlogSummary ToBlogSummaryView(Model.Blog model)
         {
             if (model == null) return null;
 
@@ -38,7 +39,7 @@ namespace WebAPI.Component.Blog.Controller.View.Builder
             return result;
         }
 
-        public Model.Blog NewBlog(Blog view)
+        public Model.Blog ToBlogModel(Blog view)
         {
             if (view == null) return null;
 
@@ -50,7 +51,7 @@ namespace WebAPI.Component.Blog.Controller.View.Builder
             };
         }
 
-        public Model.Blog UdpateBlog(int id, Blog view)
+        public Model.Blog ToBlogModel(int id, Blog view)
         {
             if (view == null) return null;
 
@@ -60,6 +61,22 @@ namespace WebAPI.Component.Blog.Controller.View.Builder
                 Url = view.Url,
                 Description = view.Description
             };
+        }
+
+        public BlogHistory ToBlogHistoryView(Model.Blog model)
+        {
+            if (model == null) return null;
+
+            var result = _viewFactory.Create(BlogViewEnumerator.BlogHistory) as BlogHistory;
+            result.Id = model.Id;
+            result.Url = model.Url;
+            result.Description = model.Description;
+            result.CreatedBy = model.CreatedBy;
+            result.CreatedDate = model.CreatedDate;
+            result.UpdatedBy = model.UpdatedBy;
+            result.UpdatedDate = model.UpdatedDate;
+
+            return result;
         }
     }
 }

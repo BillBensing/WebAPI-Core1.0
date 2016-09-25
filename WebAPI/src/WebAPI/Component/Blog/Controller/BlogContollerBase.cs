@@ -18,22 +18,22 @@ namespace WebAPI.Component.Blog.Controller
 
         public virtual async Task<View.BlogSummary> Create(View.Blog blog)
         {
-            var newBlog = _viewBldr.NewBlog(blog);
+            var newBlog = _viewBldr.ToBlogModel(blog);
             var model = await _blogSvc.Create(newBlog);
-            var result = _viewBldr.BlogSummary(model);
+            var result = _viewBldr.ToBlogSummaryView(model);
             return result;
         }
 
         public virtual async Task<View.BlogSummary> Read(int id)
         {
             var blog = await _blogSvc.Read(id);
-            var result = _viewBldr.BlogSummary(blog);
+            var result = _viewBldr.ToBlogSummaryView(blog);
             return result;
         }
 
         public virtual async Task Update(int id, View.Blog blog)
         {
-            var updateBlog = _viewBldr.UdpateBlog(id, blog);
+            var updateBlog = _viewBldr.ToBlogModel(id, blog);
             await _blogSvc.Update(updateBlog);
         }
 

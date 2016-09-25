@@ -4,9 +4,10 @@ namespace WebAPI.Component.Blog.Controller.View.Builder
 {
     public interface IBlogViewBuilder
     {
-        Blog Blog(Model.Blog model);
-        BlogSummary BlogSummary(Model.Blog model);
-        Model.Blog NewBlog(Blog view);
-        Model.Blog UdpateBlog(int id, Blog view);
+        Blog ToBlogView(Model.Blog model);
+        BlogHistory ToBlogHistoryView(Model.Blog model);
+        BlogSummary ToBlogSummaryView(Model.Blog model);
+        Model.Blog ToBlogModel(Blog view);
+        Model.Blog ToBlogModel(int id, Blog view);
     }
 }

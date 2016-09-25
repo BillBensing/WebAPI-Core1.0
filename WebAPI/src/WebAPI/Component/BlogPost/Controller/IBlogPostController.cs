@@ -5,9 +5,9 @@ namespace WebAPI.Component.BlogPost.Controller
 {
     public interface IBlogPostController
     {
-        Task<IActionResult> Create(int blogId, BlogPost blogPost);
+        Task<IActionResult> Create(int blogId, View.BlogPost blogPost);
         Task<IActionResult> Read(int blogId, int postId);
-        Task<IActionResult> Update(int blogId, BlogPost blogPost);
+        Task<IActionResult> Update(int blogId, int postid, View.BlogPost blogPost);
         Task<IActionResult> Delete(int blogId, int postId);
     }
 }

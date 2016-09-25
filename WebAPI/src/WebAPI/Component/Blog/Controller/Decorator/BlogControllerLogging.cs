@@ -7,11 +7,11 @@ using Microsoft.Extensions.Logging;
 
 namespace WebAPI.Component.Blog.Controller.Decorator
 {
-    public class BlogControllerLoggingDecorator : BlogControllerBase
+    public class BlogControllerLogging : BlogControllerBase
     {
         protected readonly ILogger _logger;
 
-        public BlogControllerLoggingDecorator(IBlogService blogService, IBlogViewBuilder viewBuilder, ILogger logger) : base(blogService, viewBuilder)
+        public BlogControllerLogging(IBlogService blogService, IBlogViewBuilder viewBuilder, ILogger logger) : base(blogService, viewBuilder)
         {
             _logger = logger;
         }

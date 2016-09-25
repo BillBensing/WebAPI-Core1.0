@@ -1,44 +1,84 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+using WebAPI.Component.BlogPost.Controller.Decorator;
+using WebAPI.Component.BlogPost.Controller.View.Builder;
 using WebAPI.Component.BlogPost.Service;
+using System.Threading.Tasks;
+using System;
 
 namespace WebAPI.Component.BlogPost.Controller
 {
     [Route("api/blog")]
-    public class BlogPostController : Microsoft.AspNetCore.Mvc.Controller, IBlogPostController
+    public class BlogPostController : BlogPostControllerLogging, IBlogPostController
     {
-        protected readonly IBlogPostService _blogPostSvc;
-        public BlogPostController(IBlogPostService blogPostService)
-        {
-            _blogPostSvc = blogPostService;
-        }
+        public BlogPostController(
+            IBlogPostService blogPostService, 
+            IBlogPostViewBuilder viewBuilder,
+            ILogger<BlogPostController> logger) 
+            : base(blogPostService, viewBuilder, logger) { }
 
         [HttpPost("{blogId}/post")]
-        public async Task<IActionResult> Create(int blogId, [FromBody]BlogPost blogPost)
+        public new async Task<IActionResult> Create(int blogId, [FromBody] View.BlogPost blogPost)
         {
-            var result = await _blogPostSvc.Create(blogPost);
-            return Created(string.Empty, result);
+            IActionResult result;
+            try
+            {
+                var post = await base.Create(blogId, blogPost);
+                result = Ok(post);
+            }
+            catch (Exception)
+            {
+                result = StatusCode(500);
+            }
+            return result;
         }
 
         [HttpGet("{blogId}/post/{postId}")]
-        public async Task<IActionResult> Read(int blogId, int postId)
+        public new async Task<IActionResult> Read(int blogId, int postId)
         {
-            var result = await _blogPostSvc.Read(postId);
-            return Ok(result);
+            IActionResult result;
+            try
+            {
+                var post = await base.Read(blogId,postId);
+                result = (post != null) ? Ok(post) : NotFound() as IActionResult;
+            }
+            catch (Exception)
+            {
+                result = StatusCode(500);
+            }
+            return result;
         }
 
         [HttpPut("{blogId}/post/{postId}")]
-        public async Task<IActionResult> Update(int blogId, [FromBody]BlogPost blogPost)
+        public new async Task<IActionResult> Update(int blogId, int postId, [FromBody] View.BlogPost blogPost)
         {
-            await _blogPostSvc.Update(blogPost);
-            return NoContent();
+            IActionResult result;
+            try
+            {
+                await base.Update(blogId, postId, blogPost);
+                result = NoContent();
+            }
+            catch (Exception)
+            {
+                result = StatusCode(500);
+            }
+            return result;
         }
 
         [HttpDelete("{blogId}/post/{postId}")]
-        public async Task<IActionResult> Delete(int blogId, int postId)
+        public new async Task<IActionResult> Delete(int blogId, int postId)
         {
-            await _blogPostSvc.Delete(postId);
-            return NoContent();
+            IActionResult result;
+            try
+            {
+                await base.Delete(blogId, postId);
+                result = NoContent();
+            }
+            catch (Exception)
+            {
+                result = StatusCode(500);
+            }
+            return result;
         }
     }
 }
