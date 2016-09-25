@@ -8,7 +8,7 @@ namespace WebAPI.Core.Service
 {
     public abstract class AbstractService<T> : IService<T> where T : AbstractEntity
     {
-       protected readonly IRepository<T> _repository;
+       protected IRepository<T> _repository;
 
         /// <summary>
         /// Base logic for all Service inheritance

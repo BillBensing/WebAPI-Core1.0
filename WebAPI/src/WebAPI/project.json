@@ -61,7 +61,7 @@
     "emitEntryPoint": true,
     "preserveCompilationContext": true,
     "xmlDoc": true,
-    "nowarn": [ "1591", "1570" ]
+    "nowarn": ["1591"]
   },
 
   "runtimeOptions": {

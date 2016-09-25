@@ -2,8 +2,10 @@
 using WebAPI.Component.BlogPost.Controller.View.Builder;
 using WebAPI.Component.BlogPost.Repository;
 using WebAPI.Component.BlogPost.Service;
+using WebAPI.Core.Builders.ObjectBuilder;
 using WebAPI.Core.Factory;
 using View = WebAPI.Component.BlogPost.Controller.View;
+using Model = WebAPI.Component.BlogPost;
 
 namespace WebAPI.Component.Blog.Config
 {
@@ -13,8 +15,12 @@ namespace WebAPI.Component.Blog.Config
         {
             services.AddSingleton<IBlogPostRepository, BlogPostRepository>();
 
+            services.AddSingleton<IObjectBuilder<Model.BlogPost, View.BlogPostSummary>, View.BlogPostSummaryObjectBuilder>();
+            services.AddSingleton<IObjectBuilder<Model.BlogPost, View.BlogPost>, View.BlogPostObjectBuilder>();
             services.AddSingleton<IFactory<View.BlogPost>, Factory<View.BlogPost>>();
+
             services.AddSingleton<IBlogPostViewBuilder, BlogPostViewBuilder>();
+
             services.AddSingleton<IBlogPostService, BlogPostService>();
         }
     }

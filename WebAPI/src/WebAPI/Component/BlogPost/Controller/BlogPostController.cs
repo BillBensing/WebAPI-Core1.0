@@ -33,6 +33,22 @@ namespace WebAPI.Component.BlogPost.Controller
             return result;
         }
 
+        [HttpGet("{blogId}/post")]
+        public new async Task<IActionResult> ReadAll(int blogId)
+        {
+            IActionResult result;
+            try
+            {
+                var posts = await base.ReadAll(blogId);
+                result = Ok(posts);
+            }
+            catch (Exception)
+            {
+                result = StatusCode(500);
+            }
+            return result;
+        }
+
         [HttpGet("{blogId}/post/{postId}")]
         public new async Task<IActionResult> Read(int blogId, int postId)
         {

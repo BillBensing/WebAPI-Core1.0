@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using System.Threading.Tasks;
 using WebAPI.Component.BlogPost.Controller.View.Builder;
 using WebAPI.Component.BlogPost.Service;
@@ -11,7 +12,8 @@ namespace WebAPI.Component.BlogPost.Controller
         protected readonly IBlogPostService _blogPostSvc;
         protected readonly IBlogPostViewBuilder _viewBldr;
 
-        public BlogPostControllerBase(IBlogPostService blogPostService, IBlogPostViewBuilder viewBuilder)
+        public BlogPostControllerBase(  IBlogPostService blogPostService, 
+                                        IBlogPostViewBuilder viewBuilder)
         {
             _blogPostSvc = blogPostService;
             _viewBldr = viewBuilder;
@@ -32,6 +34,12 @@ namespace WebAPI.Component.BlogPost.Controller
             return result;
         }
 
+        public virtual async Task<IQueryable<View.BlogPostSummary>> ReadAll(int blogId)
+        {
+            var posts = await _blogPostSvc.GetAllByBlogId(blogId);
+            var result = _viewBldr.ToBlogPostSummaryView(posts);
+            return result;
+        }
 
         public virtual async Task Update(int blogId, int postId, [FromBody] View.BlogPost blogPost)
         {
