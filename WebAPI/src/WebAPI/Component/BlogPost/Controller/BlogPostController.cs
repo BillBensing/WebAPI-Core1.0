@@ -11,6 +11,7 @@ using WebAPI.Core.Controller.Pagination;
 namespace WebAPI.Component.BlogPost.Controller
 {
     [Route("api/blog")]
+    [Produces("application/json")]
     public class BlogPostController : BlogPostControllerLogging, IBlogPostController
     {
         protected readonly IPaginationBuilder<View.BlogPostSummary> _pageBuilder;

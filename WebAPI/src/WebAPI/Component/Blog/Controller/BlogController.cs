@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 namespace WebAPI.Component.Blog.Controller
 {
     [Route("api/blog")]
+    [Produces("application/json")]
     public class BlogController : BlogControllerLogging, IBlogController
     {
 
