@@ -6,6 +6,7 @@ using WebAPI.Core.Builders.ObjectBuilder;
 using WebAPI.Core.Factory;
 using View = WebAPI.Component.BlogPost.Controller.View;
 using Model = WebAPI.Component.BlogPost;
+using WebAPI.Core.Controller.Pagination;
 
 namespace WebAPI.Component.Blog.Config
 {
@@ -22,6 +23,8 @@ namespace WebAPI.Component.Blog.Config
             services.AddSingleton<IBlogPostViewBuilder, BlogPostViewBuilder>();
 
             services.AddSingleton<IBlogPostService, BlogPostService>();
+
+            services.AddSingleton<IPaginationBuilder<View.BlogPostSummary>, PaginationBuilder<View.BlogPostSummary>>();
         }
     }
 }

@@ -5,17 +5,25 @@ using WebAPI.Component.BlogPost.Controller.View.Builder;
 using WebAPI.Component.BlogPost.Service;
 using System.Threading.Tasks;
 using System;
+using WebAPI.Core.Extension;
+using WebAPI.Core.Controller.Pagination;
 
 namespace WebAPI.Component.BlogPost.Controller
 {
     [Route("api/blog")]
     public class BlogPostController : BlogPostControllerLogging, IBlogPostController
     {
+        protected readonly IPaginationBuilder<View.BlogPostSummary> _pageBuilder;
+
         public BlogPostController(
             IBlogPostService blogPostService, 
             IBlogPostViewBuilder viewBuilder,
+            IPaginationBuilder<View.BlogPostSummary> pageBuilder,
             ILogger<BlogPostController> logger) 
-            : base(blogPostService, viewBuilder, logger) { }
+            : base(blogPostService, viewBuilder, logger) {
+
+            _pageBuilder = pageBuilder;
+        }
 
         [HttpPost("{blogId}/post")]
         public new async Task<IActionResult> Create(int blogId, [FromBody] View.BlogPost blogPost)
@@ -33,13 +41,18 @@ namespace WebAPI.Component.BlogPost.Controller
             return result;
         }
 
-        [HttpGet("{blogId}/post")]
-        public new async Task<IActionResult> ReadAll(int blogId)
+        [HttpGet]
+        [Route("{blogId}/post", Name ="BlogPosts")]
+        public async Task<IActionResult> ReadAll(int blogId, [FromQuery] string sort = "id", [FromQuery] int page = 0, [FromQuery] int pageSize = 5)
         {
             IActionResult result;
             try
             {
                 var posts = await base.ReadAll(blogId);
+                posts = posts.ApplySort(sort);
+                posts = _pageBuilder.Use(sort, page, pageSize)
+                    .ApplyToData(posts)
+                    .Build(Response, Url, "BlogPosts");
                 result = Ok(posts);
             }
             catch (Exception)
